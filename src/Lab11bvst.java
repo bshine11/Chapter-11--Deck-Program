@@ -1,5 +1,9 @@
 /*************************************
- * Brendan Shine Mr. Kiedes Period 2 * 11-30-15 Deck Program *
+ * Brendan Shine 
+ * Mr. Kiedes Period 2               *
+ * 11-30-15                          *
+ * Deck Program                      *
+ * 
  ************************************/
 
 public class Lab11bvst {
@@ -12,7 +16,6 @@ public class Lab11bvst {
 class Deck {
 	private Card[] cards;
 	private int size;
-
 
 	public Deck() {
 		size = 0;
@@ -73,15 +76,28 @@ class Deck {
 		add("Spades", "Queen", 10);
 		add("Spades", "King", 10);
 		add("Spades", "Ace", 11);
-
+		
+		//shuffle cards
+		shuffle();
 	}
-
+	//add cards
 	public void add(String suit, String rank, int value) {
 		Card temp = new Card(suit, rank, value);
 		cards[size] = temp;
 		size++;
 	}
-
+	
+	//shuffle cards
+	public void shuffle(){
+		for (int k = 0; k < 1000; k++) {
+			int firstIndex = (int) (Math.random() * cards.length);
+			int lastIndex = (int) (Math.random() * cards.length);
+			//swap method
+			Card temp = cards[firstIndex];
+			cards[firstIndex] = cards[lastIndex];
+			cards[lastIndex] = temp;
+		}
+	}
 	public String toString() {
 		String temp = "";
 		for (int k = 0; k < size; k++)
@@ -89,40 +105,33 @@ class Deck {
 		return temp;
 
 	}
-	private void shuffle(cards){
-		
-		for(int k=0; k < 1000; k ++){
-			int shuffleCards = (int)Math.random()*52;
-			cards[shuffleCards];
+
+	class Card {
+		private String suit;
+		private String rank;
+		private int value;
+
+		public Card(String suit, String rank, int value) {
+			this.suit = suit;
+			this.rank = rank;
+			this.value = value;
 		}
-	} 
-}
 
-class Card {
-	private String suit;
-	private String rank;
-	private int value;
+		public String getSuit() {
+			return suit;
+		}
 
-	public Card(String suit, String rank, int value) {
-		this.suit = suit;
-		this.rank = rank;
-		this.value = value;
+		public String getRank() {
+			return rank;
+		}
+
+		public int getValue() {
+			return value;
+		}
+
+		public String toString() {
+			return "[" + suit + ", " + rank + ", " + value + "]";
+		}
+
 	}
-
-	public String getSuit() {
-		return suit;
-	}
-
-	public String getRank() {
-		return rank;
-	}
-
-	public int getValue() {
-		return value;
-	}
-
-	public String toString() {
-		return "[" + suit + ", " + rank + ", " + value + "]";
-	}
-
 }
